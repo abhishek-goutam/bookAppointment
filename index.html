@@ -25,13 +25,40 @@
     </header>
     <div class="container">
         <div id="main" class="card card-body">
-          <h2 class="title">Fill Details</h2>
+          <h2 class="title">Fill the following details :-)</h2>
           <form id="addForm" class="form-inline mb-3">
            Name: <input type="text" class="form-control mr-2" id="name" />
            Email:<input type="email" class="form-control mr-2" id="email"/>
-            <input type="submit" class="btn btn-dark" value="Submit" />
+           Time: <input type="datetime-local" class="form-control mr-2" id="time"/>
+            <input type="submit" class="btn btn-dark " value="Book" />
           </form>
           
+        </div>
+        <div id="main" class="card card-body">
+          <h2 class="title"></h2>
+          <h2 class="title">Users</h2>
+          <ul id="items" class="list-group">
+            <li class="list-group-item">
+              User 1
+              <button class="btn btn-danger btn-sm float-right delete">X</button>
+              <button class="btn btn-danger btn-sm float-right edit"> Edit </button>
+            </li>
+            <li class="list-group-item">
+              User 2
+              <button class="btn btn-danger btn-sm float-right delete">X</button>
+              <button class="btn btn-danger btn-sm float-right edit"> Edit </button>
+            </li>
+            <li class="list-group-item">
+              User 3
+              <button class="btn btn-danger btn-sm float-right delete">X</button>
+              <button class="btn btn-danger btn-sm float-right edit"> Edit </button>
+            </li>
+            <li class="list-group-item">
+              User 4
+              <button class="btn btn-danger btn-sm float-right delete">X</button>
+              <button class="btn btn-danger btn-sm float-right edit"> Edit </button>
+            </li>
+          </ul>
         </div>
       </div>
     <script src="./app.js"></script>

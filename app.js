@@ -1,18 +1,43 @@
-var userDetails = document.getElementById('addForm');
+var form = document.getElementById('addForm');
+var itemList = document.getElementById('items');
 
-userDetails.addEventListener('submit',bookAppointment);
+form.addEventListener('submit',bookAppointment);
 
 function bookAppointment(e){
 e.preventDefault();
 var userName = document.getElementById('name').value;
 var userEmail = document.getElementById('email').value;
-console.log(userName,userEmail)
-
-var userDetails ={
-    'userName':userName,
-    'userEmail':userEmail
+const localStorageContent = localStorage.getItem("userDetails");
+let userDetails;
+let x ={
+    "userName":userName,
+    "userEmail":userEmail
 }
-localStorage.setItem('userName',userName);
-localStorage.setItem('userEmail',userEmail);
+if(localStorageContent == null){
+    userDetails =[];
+}else{
+    userDetails = JSON.parse(localStorageContent);
+}
+userDetails.push(x);
+localStorage.setItem("userDetails",JSON.stringify(userDetails))
+
+
+var li = document.createElement("li");
+li.className = "list-group-item";
+li.appendChild(document.createTextNode(userName));
+li.appendChild(document.createTextNode(userEmail)); 
+var deleteBtn = document.createElement("button");
+var editBtn = document.createElement("button");
+editBtn.className = "btn btn-danger btn-sm float-right edit";
+editBtn.appendChild(document.createTextNode("Edit"));
+li.appendChild(editBtn);
+deleteBtn.className = "btn btn-danger btn-sm float-right delete";
+deleteBtn.appendChild(document.createTextNode("X"));
+li.appendChild(deleteBtn);
+
+itemList.appendChild(li);
+
+
+
 
 }
