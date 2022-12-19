@@ -1,43 +1,47 @@
-var form = document.getElementById('addForm');
-var itemList = document.getElementById('items');
+function saveToLocalStorage(e) {
+  e.preventDefault();
+  const name = e.target.username.value;
+  const email = e.target.emailId.value;
+  const phonenumber = e.target.phonenumber.value;
 
-form.addEventListener('submit',bookAppointment);
-
-function bookAppointment(e){
-e.preventDefault();
-var userName = document.getElementById('name').value;
-var userEmail = document.getElementById('email').value;
-const localStorageContent = localStorage.getItem("userDetails");
-let userDetails;
-let x ={
-    "userName":userName,
-    "userEmail":userEmail
+  const obj = {
+    name,
+    email,
+    phonenumber,
+  };
+  localStorage.setItem(obj.emailid, JSON.stringify(obj));
+  showNewUserOnScreen(obj);
 }
-if(localStorageContent == null){
-    userDetails =[];
-}else{
-    userDetails = JSON.parse(localStorageContent);
+
+window.addEventListener("DOMContentLoaded", () => {
+  const localStorageObj = localStorage;
+  const localStorageKeys = Object.keys(localStorageObj);
+  console.log(localStorageKeys);
+
+  for (let i = 0; i < localStorageKeys.length; i++) {
+    const key = localStorageKeys[i];
+    const userDetailsString = localStorageObj[key];
+    const userDetailsObj = JSON.parse(userDetailsString);
+    showNewUserOnScreen(userDetailsObj);
+  }
+});
+
+function showNewUserOnScreen(user) {
+  const parentNode = document.getElementById("listOfUsers");
+  const childHTML = `<li id=${user.email}> ${user.name} - ${user.email}
+  <button onclick=deleteUser('${user.email}')> Delete User </button>
+</li>`;
+parentNode.innerHTML = parentNode.innerHTML +childHTML;
 }
-userDetails.push(x);
-localStorage.setItem("userDetails",JSON.stringify(userDetails))
 
+function deleteUser(emailId){
+localStorage.removeItem(emailId);
+removeUserFromScreen(emailId);
+}
 
-var li = document.createElement("li");
-li.className = "list-group-item";
-li.appendChild(document.createTextNode(userName));
-li.appendChild(document.createTextNode(userEmail)); 
-var deleteBtn = document.createElement("button");
-var editBtn = document.createElement("button");
-editBtn.className = "btn btn-danger btn-sm float-right edit";
-editBtn.appendChild(document.createTextNode("Edit"));
-li.appendChild(editBtn);
-deleteBtn.className = "btn btn-danger btn-sm float-right delete";
-deleteBtn.appendChild(document.createTextNode("X"));
-li.appendChild(deleteBtn);
+function removeUserFromScreen(emailId){
+  const parentNode = document.getElementById("listOfUsers");
+  const childNodeToBeDeleted =document.getElementById(emailId);
 
-itemList.appendChild(li);
-
-
-
-
+  parentNode.removeChild(childNodeToBeDeleted)
 }
