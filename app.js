@@ -55,19 +55,30 @@ window.addEventListener("DOMContentLoaded", () => {
 function showNewUserOnScreen(user) {
   const parentNode = document.getElementById("listOfUsers");
   const childHTML = `<li id=${user.email}> ${user.name} - ${user.email}
-  <button onclick=deleteUser('${user.email}')> Delete User </button>
+  <button onclick=deleteUser('${user._id}')> Delete User </button>
 </li>`;
   parentNode.innerHTML = parentNode.innerHTML + childHTML;
 }
 
-function deleteUser(emailId) {
-  localStorage.removeItem(emailId);
-  removeUserFromScreen(emailId);
+function deleteUser(id) {
+  
+  axios
+    .delete(
+      `https://crudcrud.com/api/1dbc309b412e4b98ad7c73a56382282d/appointmentDataUpdated/${id}`
+    )
+    .then((res) => {
+      console.log(res);
+      
+    }
+    );
+    removeUserFromScreen(id);
+  // localStorage.removeItem(emailId);
+  
 }
 
 function removeUserFromScreen(emailId) {
   const parentNode = document.getElementById("listOfUsers");
+  console.log(parentNode)
   const childNodeToBeDeleted = document.getElementById(emailId);
-
   parentNode.removeChild(childNodeToBeDeleted);
 }
