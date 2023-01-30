@@ -15,14 +15,16 @@
   <body>
     <form onsubmit="saveToLocalStorage(event)">
       <label> Name</label>
-      <input type="text" name="username"  required/>
+      <input type="text" name="username" required />
       <label> EmailId</label>
-      <input type="email" name="emailId"  required/>
+      <input type="email" name="emailId" required />
       <label> Phone Number</label>
       <input type="tel" name="phonenumber" />
-      <button> Submit </button>
-  </form>
-  <ul id='listOfUsers'></ul>
+      <button>Submit</button>
+    </form>
+    <ul id="listOfUsers"></ul>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+
     <script src="./app.js"></script>
   </body>
 </html>
