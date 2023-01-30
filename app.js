@@ -81,4 +81,5 @@ function removeUserFromScreen(emailId) {
   console.log(parentNode)
   const childNodeToBeDeleted = document.getElementById(emailId);
   parentNode.removeChild(childNodeToBeDeleted);
+  
 }
